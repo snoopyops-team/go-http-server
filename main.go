@@ -40,9 +40,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.String()
 
 	// 打印日志
-	fmt.Printf("Client IP: %-15s | Method: %-6s | URL: %s\n", clientIP, r.Method, url)
-
-	w.Write([]byte("Request logged"))
+	logMessage := fmt.Sprintf("Client IP: %-15s | Method: %-6s | URL: %s\n", clientIP, r.Method, url)
+	fmt.Println(logMessage)
+	// 返回给浏览器
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Write([]byte(logMessage))
 }
 
 func main() {
